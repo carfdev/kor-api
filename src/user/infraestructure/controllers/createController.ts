@@ -12,7 +12,7 @@ export class CreateUserController {
     } catch (e: any) {
       if (e.code === "P2002") {
         return error(409, {
-          message: "User already exists"
+          message: "Email already exists"
         })
       }
       return error(500, {
