@@ -6,8 +6,11 @@ export class CreateUserController {
     
     try {
       const user = await this.createUser.run(body.email, body.password);
+      const { password, ...userWithoutPassword } = user;
       return error(201, {
-        data: user
+        data: {
+          user: userWithoutPassword
+        }
       })
     } catch (e: any) {
       if (e.code === "P2002") {
