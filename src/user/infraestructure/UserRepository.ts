@@ -11,11 +11,35 @@ export class UserRepository implements IUser {
     const user = await this.db.user.create({
       data: {
         email: email,
-        password: password
+        password: password,
+        refresh_token: ""
       }
     });
 
     return new User(user.id, user.email, user.password);
+  }
+
+  async addRefreshToken(id: string, refresh_token: string): Promise<void> {
+    await this.db.user.update({
+      where: {
+        id: id
+      },
+      data: {
+        refresh_token: refresh_token
+      }
+    });
+  }
+
+  async getRefreshToken(id: string): Promise<string | null> {
+    const user = await this.db.user.findUnique({
+      where: {
+        id: id
+      }
+    });
+    if (!user) {
+      return null;
+    }
+    return user.refresh_token;
   }
 
   async find(email: string): Promise<User | null> {
