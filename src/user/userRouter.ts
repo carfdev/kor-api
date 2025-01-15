@@ -1,11 +1,9 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { createUserController } from "@/server/dependecies";
+import { loginUserController } from "@/server/dependecies";
+import { createUserDTO } from "./domain/userDTO";
 
 export const userRouter = new Elysia({prefix: "/user"})
-  .post('/', createUserController.run.bind(createUserController), {
-    body: t.Object({
-      email: t.String(),
-      password: t.String()
-    })
-  })
+  .post('/register', createUserController.run.bind(createUserController), createUserDTO)
+  .post('/login', loginUserController.run.bind(loginUserController), createUserDTO)
   .get('/', () => "Get all users")
