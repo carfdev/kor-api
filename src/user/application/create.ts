@@ -1,8 +1,13 @@
 import type { IUser } from "../domain/IUser";
+import type { IHash } from "@/services/interfaces/IHash";
 
 export class CreateUser {
-  constructor(private userRepository: IUser) {}
+  constructor(
+    private userRepository: IUser,
+    private hash: IHash
+  ) {}
   async run(email: string, password: string) {
-    return await this.userRepository.create(email, password);
+    const passwordHash = await this.hash.hash(password);
+    return await this.userRepository.create(email, passwordHash);
   }
 }
