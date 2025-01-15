@@ -3,8 +3,8 @@ import { User } from "../domain/User";
 import { PrismaClient } from "@prisma/client";
 
 export class UserRepository implements IUser {
-  
-  constructor(private db: PrismaClient) {
+  private db: PrismaClient
+  constructor() {
     this.db = new PrismaClient();
   }
   async create(email: string, password: string): Promise<User> {
