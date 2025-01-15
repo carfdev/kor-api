@@ -3,6 +3,7 @@ import { LoginUser } from "@/user/application/login";
 export class LoginUserController {
   constructor(private loginUser: LoginUser) {}
   async run({ body, access, refresh, set, cookie: { auth } }: { body: {email: string, password: string}, access: any, refresh: any, set: any, cookie: any }) {
+    
     try {
       const user = await this.loginUser.run(body.email, body.password);
       if (user instanceof Error) {
@@ -29,6 +30,8 @@ export class LoginUserController {
         const refresh_token = await refresh.sign({
           id: user.id
         });
+
+        await this.loginUser.updateRefreshToken(user.id, refresh_token);
 
         auth.set({
           value: refresh_token,
