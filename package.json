@@ -8,7 +8,6 @@
     "start": "./server"
   },
   "dependencies": {
-    "@elysiajs/cookie": "^0.8.0",
     "@elysiajs/jwt": "^1.2.0",
     "@prisma/client": "6.2.1",
     "elysia": "latest"
