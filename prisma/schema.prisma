@@ -16,3 +16,35 @@ model user {
   password String
   refresh_token String
 }
+
+model collection {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  groups      group[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model group {
+  id            Int       @id @default(autoincrement())
+  name          String    @unique
+  description   String?
+  collectionId  Int
+  collection    collection @relation(fields: [collectionId], references: [id])
+  questions     question[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model question {
+  id         Int       @id @default(autoincrement())
+  question   String
+  image      String    // URL de la imagen
+  options    Json      // Almacena las 4 opciones como un array JSON
+  correctAnswer Int    // Índice de la respuesta correcta dentro del array `options`
+  groupId    Int
+  group      group     @relation(fields: [groupId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
