@@ -44,4 +44,5 @@ package-lock.json
 
 server
 
-/prisma
+/prisma/migrations
+/prisma/dev.db
