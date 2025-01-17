@@ -5,7 +5,16 @@ export class CreateCollectionController {
   async run({ body, set, access, headers }: { body: {name: string, description?: string}, set: any, access: any, headers: any}) {
     try {
 
-      const token = headers["authorization"].split(" ")[1];
+      const authorization = headers["authorization"]
+
+      if (!authorization) {
+        set.status = 401;
+        return {
+          message: "Unauthorized"
+        }
+      }
+
+      const token = authorization.split(" ")[1];
 
       if (!token) {
         set.status = 401;
