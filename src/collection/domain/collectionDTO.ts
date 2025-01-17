@@ -6,3 +6,9 @@ export const createCollectionDTO = {
     description: t.Optional(t.String())
   })
 }
+
+export const getCollectionDTO = {
+  params: t.Object({
+    id: t.Number()
+  })
+}
