@@ -5,6 +5,12 @@ export class CreateUserController {
   async run({ body, set }: { body: {email: string, password: string}, set: any}) {
     
     try {
+      if (!body.email || !body.password) {
+        set.status = 400;
+        return {
+          message: "Email and password are required"
+        }
+      }
       const user = await this.createUser.run(body.email, body.password);
       const { password, ...userWithoutPassword } = user;
       set.status = 201;
