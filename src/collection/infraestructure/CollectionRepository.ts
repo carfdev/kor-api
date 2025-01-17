@@ -8,10 +8,16 @@ export class CollectionRepository implements ICollection {
     this.db = new PrismaClient();
   }
   find(id: number): Promise<Collection | null> {
-    throw new Error("Method not implemented.");
+    const collection = this.db.collection.findUnique({
+      where: {
+        id: id
+      }
+    });
+    return collection;
   }
   findAll(): Promise<Collection[]> {
-    throw new Error("Method not implemented.");
+    const collections = this.db.collection.findMany();
+    return collections;
   }
   update(id: number, name: string, description?: string): Promise<Collection> {
     throw new Error("Method not implemented.");
