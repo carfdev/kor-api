@@ -42,7 +42,7 @@ yarn-error.log*
 package-lock.json
 **/*.bun
 
-server
+run
 
 /prisma/migrations
 /prisma/dev.db*
