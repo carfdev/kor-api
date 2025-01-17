@@ -31,6 +31,13 @@ export class CreateCollectionController {
           message: "Unauthorized"
         }
       }
+
+      if (!body.name) {
+        set.status = 400;
+        return {
+          message: "Name is required"
+        }
+      }
       
 
       const collection = await this.createCollection.run(body.name, body.description);
