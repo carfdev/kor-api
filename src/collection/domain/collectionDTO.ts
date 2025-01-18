@@ -10,19 +10,6 @@ export const createCollectionDTO = {
     tags: ['Collection'],
     summary: 'Create a new collection',
     description: 'Create a new collection with the given name and description',
-    parameters: [
-      {
-        name: 'Authorization',
-        in: 'header',
-        description: 'Bearer token for authentication',
-        required: true,
-        schema: {
-          type: 'string',
-          format: 'bearer',
-          example: "Bearer <your_token_here>"
-        }
-      }
-    ],
     responses: {
       201: {
         description: 'Collection created successfully',
@@ -120,19 +107,6 @@ export const getCollectionDTO = {
     tags: ['Collection'],
     summary: 'Get a collection by id',
     description: 'Get a collection by id with the given id',
-    parameters: [
-      {
-        name: 'Authorization',
-        in: 'header',
-        description: 'Bearer token for authentication',
-        required: true,
-        schema: {
-          type: 'string',
-          format: 'bearer',
-          example: "Bearer <your_token_here>"
-        }
-      }
-    ],
     responses: {
       200: {
         description: 'Collection found successfully',
@@ -211,19 +185,6 @@ export const getAllCollectionDTO = {
     tags: ['Collection'],
     summary: 'Get all collections',
     description: 'Get all collections',
-    parameters: [
-      {
-        name: 'Authorization',
-        in: 'header',
-        description: 'Bearer token for authentication',
-        required: true,
-        schema: {
-          type: 'string',
-          format: 'bearer',
-          example: "Bearer <your_token_here>"
-        }
-      }
-    ],
     responses: {
       200: {
         description: 'Collections found successfully',
