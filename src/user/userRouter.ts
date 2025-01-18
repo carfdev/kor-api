@@ -21,4 +21,5 @@ export const userRouter = new Elysia({
   .post('/register', (ctx) => createUserController.run(ctx), createUserDTO)
   // @ts-ignore
   .post('/login', (ctx) => loginUserController.run(ctx), loginUserDTO)
+  // @ts-ignore
   .get('/refresh', (ctx) => refreshTokenController.run(ctx), refreshUserDTO)
