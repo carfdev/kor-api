@@ -9,7 +9,7 @@ export class Server {
   constructor() {
     this.app = new Elysia()
     this.app.use(swagger({
-      path: '/v1/swagger',
+      path: '/v1/doc',
       documentation: {
         info: {
             title: 'API Driving Theory Practice',
@@ -18,7 +18,21 @@ export class Server {
         tags: [
           { name: 'Auth', description: 'Authentication endpoints' },
           { name: 'Collection', description: 'Collection endpoints' },
-        ]
+        ],
+        components: {
+          securitySchemes: {
+              bearerAuth: {
+                  type: 'http',
+                  scheme: 'bearer',
+                  bearerFormat: 'JWT'
+              },
+              cookieAuth: {
+                  type: 'apiKey',
+                  name: 'auth',
+                  in: 'cookie'
+              }
+          }
+      }
     }
   }))
     this.app.group('/api/v1', (app) => 
