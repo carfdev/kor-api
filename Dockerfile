@@ -13,7 +13,7 @@ COPY ./prisma ./prisma
 COPY ./tsconfig.json ./tsconfig.json
 
 ENV NODE_ENV=production
-ENV DATABASE_URL="file:./dev.db"
+ENV DATABASE_URL="postgresql://postgres:b04344bac6c4ad61@srv-captain--api-db:5432/postgres"
 
 RUN bunx prisma migrate deploy
 # Generar Prisma Client y Query Engine
