@@ -36,6 +36,7 @@ USER nonroot
 
 ENV NODE_ENV=production
 ENV PRISMA_QUERY_ENGINE_LIBRARY=/app/libquery_engine-debian-openssl-1.1.x.so.node
+ENV DATABASE_URL="postgresql://postgres:b04344bac6c4ad61@srv-captain--api-db:5432/postgres"
 
 CMD ["./run"]
 
