@@ -25,7 +25,7 @@ export class CreateCollectionController {
 
       const { id } = await access.verify(token);
 
-      if (id !== 'ccaa43b3-ba50-4261-a181-0cc9fc5ccad8') {
+      if (id !== '534635a6-fa3d-4a87-89f5-62cb99beb314') {
         set.status = 401;
         return {
           message: "Unauthorized"
