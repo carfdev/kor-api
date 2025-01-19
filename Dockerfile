@@ -13,7 +13,7 @@ COPY ./prisma ./prisma
 COPY ./tsconfig.json ./tsconfig.json
 
 ENV NODE_ENV=production
-ENV DATABASE_URL="postgresql://postgres:b04344bac6c4ad61@srv-captain--api-db:5432/postgres"
+ENV DATABASE_URL="postgresql://postgres:b04344bac6c4ad61@kor-pg.webiz.se:5432/postgres"
 
 RUN bunx prisma migrate deploy
 # Generar Prisma Client y Query Engine
@@ -36,7 +36,7 @@ USER nonroot
 
 ENV NODE_ENV=production
 ENV PRISMA_QUERY_ENGINE_LIBRARY=/app/libquery_engine-debian-openssl-1.1.x.so.node
-ENV DATABASE_URL="postgresql://postgres:b04344bac6c4ad61@srv-captain--api-db:5432/postgres"
+ENV DATABASE_URL="postgresql://postgres:b04344bac6c4ad61@kor-pg.webiz.se:5432/postgres"
 
 CMD ["./run"]
 
