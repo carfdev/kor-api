@@ -31,7 +31,6 @@ COPY --from=build /usr/lib/x86_64-linux-gnu/ /usr/lib/x86_64-linux-gnu
 
 COPY --from=build /app/node_modules/.prisma/client/libquery_engine-debian-openssl-1.1.x.so.node ./libquery_engine-debian-openssl-1.1.x.so.node
 COPY --from=build /app/run run
-COPY --from=build --chmod=666 /app/prisma ./prisma
 
 USER nonroot
 
