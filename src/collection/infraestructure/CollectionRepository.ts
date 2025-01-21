@@ -19,7 +19,7 @@ export class CollectionRepository implements ICollection {
     const collections = await this.db.collection.findMany();
     return collections;
   }
-  async update(id: number, name: string, description?: string): Promise<Collection | null> {
+  async update(id: number, name?: string, description?: string): Promise<Collection | null> {
     const oldCollection = await this.db.collection.findUnique({
       where: {
         id: id
