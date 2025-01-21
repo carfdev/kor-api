@@ -7,23 +7,53 @@ export class CollectionRepository implements ICollection {
   constructor() {
     this.db = new PrismaClient();
   }
-  find(id: number): Promise<Collection | null> {
-    const collection = this.db.collection.findUnique({
+  async find(id: number): Promise<Collection | null> {
+    const collection = await this.db.collection.findUnique({
       where: {
         id: id
       }
     });
     return collection;
   }
-  findAll(): Promise<Collection[]> {
-    const collections = this.db.collection.findMany();
+  async findAll(): Promise<Collection[]> {
+    const collections = await this.db.collection.findMany();
     return collections;
   }
-  update(id: number, name: string, description?: string): Promise<Collection> {
-    throw new Error("Method not implemented.");
+  async update(id: number, name: string, description?: string): Promise<Collection | null> {
+    const oldCollection = await this.db.collection.findUnique({
+      where: {
+        id: id
+      }
+    });
+    if (!oldCollection) {
+      return null;
+    }
+    const collection = await this.db.collection.update({
+      where: {
+        id: id
+      },
+      data: {
+        name: name,
+        description: description
+      }
+    });
+    return new Collection(collection.id, collection.name, collection.createdAt, collection.updatedAt, collection.description);
   }
-  delete(id: number): Promise<void> {
-    throw new Error("Method not implemented.");
+  async delete(id: number): Promise<Collection | null> {
+    const collection = await this.db.collection.findUnique({
+      where: {
+        id: id
+      }
+    });
+    if (!collection) {
+      return null;
+    }
+    await this.db.collection.delete({
+      where: {
+        id: id
+      }
+    });
+    return collection;
   }
 
   async create(name: string, description?: string): Promise<Collection> {
