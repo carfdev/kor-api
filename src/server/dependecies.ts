@@ -19,6 +19,9 @@ import { GetAllCollectionController } from "@/collection/infraestructure/control
 import { GetCollection } from "@/collection/application/get";
 import { GetCollectionController } from "@/collection/infraestructure/controllers/getCollectionController";
 
+import { DeleteCollection } from "@/collection/application/delete";
+import { DeleteCollectionController } from "@/collection/infraestructure/controllers/deleteCollectionController";
+
 const userRepository = new UserRepository();
 const hash = new Hash();
 const createUser = new CreateUser(userRepository, hash);
@@ -39,3 +42,6 @@ export const getAllCollectionController = new GetAllCollectionController(getAllC
 
 const getCollection = new GetCollection(collectionRepository);
 export const getCollectionController = new GetCollectionController(getCollection);
+
+const deleteCollection = new DeleteCollection(collectionRepository);
+export const deleteCollectionController = new DeleteCollectionController(deleteCollection);
