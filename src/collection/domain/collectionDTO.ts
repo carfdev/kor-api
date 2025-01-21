@@ -244,3 +244,64 @@ export const getAllCollectionDTO = {
     }
   }
 }
+
+export const deleteCollectionDTO = {
+  params: t.Object({
+    id: t.Number()
+  }),
+  detail: {
+    tags: ['Collection'],
+    summary: 'Delete a collection by id',
+    description: 'Delete a collection by id with the given id',
+    responses: {
+      200: {
+        description: 'Collection deleted successfully',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Collection deleted successfully'
+              }
+            }
+          }
+        }
+      },
+      404: {
+        description: 'Not Found',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Collection not found'
+              }
+            }
+          }
+        }
+      },
+      401: {
+        description: 'Unauthorized',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Unauthorized'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
