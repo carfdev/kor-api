@@ -1,8 +1,9 @@
 import { Elysia } from "elysia";
 import { createCollectionController } from "@/server/dependecies";
 import { getAllCollectionController } from "@/server/dependecies";
+import { updateCollectionController } from "@/server/dependecies";
 import { deleteCollectionController } from "@/server/dependecies";
-import { createCollectionDTO, getCollectionDTO, getAllCollectionDTO, deleteCollectionDTO } from "./domain/collectionDTO";
+import { createCollectionDTO, getCollectionDTO, getAllCollectionDTO, updateCollectionDTO, deleteCollectionDTO } from "./domain/collectionDTO";
 import { getCollectionController } from "@/server/dependecies"; 
 import { jwt } from '@elysiajs/jwt'
 
@@ -20,5 +21,7 @@ export const collectionRouter = new Elysia({
   .get('/', (ctx) => getAllCollectionController.run(ctx), getAllCollectionDTO)
     // @ts-ignore
   .get('/:id', (ctx) => getCollectionController.run(ctx), getCollectionDTO)
+    // @ts-ignore
+  .patch('/:id', (ctx) => updateCollectionController.run(ctx), updateCollectionDTO)
     // @ts-ignore
   .delete('/:id', (ctx) => deleteCollectionController.run(ctx), deleteCollectionDTO)
