@@ -245,6 +245,90 @@ export const getAllCollectionDTO = {
   }
 }
 
+export const updateCollectionDTO = {
+  params: t.Object({
+    id: t.Number()
+  }),
+  body: t.Object({
+    name: t.Optional(t.String()),
+    description: t.Optional(t.String())
+  }),
+  detail: {
+    tags: ['Collection'],
+    summary: 'Update a collection by id',
+    description: 'Update a collection by id with the given id',
+    responses: {
+      200: {
+        description: 'Collection updated successfully',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                id: { type: 'number' },
+                name: { type: 'string' },
+                description: { type: 'string' }
+              },
+              example: {
+                id: 1,
+                name: 'My Collection',
+                description: 'This is my collection'
+              }
+            }
+          }
+        }
+      },
+      404: {
+        description: 'Not Found',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Collection not found'
+              }
+            }
+          }
+        }
+      },
+      401: {
+        description: 'Unauthorized',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Unauthorized'
+              }
+            }
+          }
+        }
+      },
+      500: {
+        description: 'Internal Server Error',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Internal Server Error'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 export const deleteCollectionDTO = {
   params: t.Object({
     id: t.Number()
