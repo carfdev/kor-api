@@ -19,6 +19,9 @@ import { GetAllCollectionController } from "@/collection/infraestructure/control
 import { GetCollection } from "@/collection/application/get";
 import { GetCollectionController } from "@/collection/infraestructure/controllers/getCollectionController";
 
+import { UpdateCollection } from "@/collection/application/update";
+import { UpdateCollectionController } from "@/collection/infraestructure/controllers/updateCollectionController";
+
 import { DeleteCollection } from "@/collection/application/delete";
 import { DeleteCollectionController } from "@/collection/infraestructure/controllers/deleteCollectionController";
 
@@ -42,6 +45,9 @@ export const getAllCollectionController = new GetAllCollectionController(getAllC
 
 const getCollection = new GetCollection(collectionRepository);
 export const getCollectionController = new GetCollectionController(getCollection);
+
+const updateCollection = new UpdateCollection(collectionRepository);
+export const updateCollectionController = new UpdateCollectionController(updateCollection);
 
 const deleteCollection = new DeleteCollection(collectionRepository);
 export const deleteCollectionController = new DeleteCollectionController(deleteCollection);
