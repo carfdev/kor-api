@@ -2,12 +2,14 @@ import { Elysia } from "elysia";
 import { userRouter } from "@/user/userRouter";
 import { collectionRouter } from "@/collection/collectionRouter";
 import { swagger } from '@elysiajs/swagger'
+import { staticPlugin } from '@elysiajs/static'
 
 export class Server {
   private app: Elysia;
 
   constructor() {
     this.app = new Elysia()
+    this.app.use(staticPlugin())
     this.app.use(swagger({
       path: '/v1/doc',
       documentation: {
