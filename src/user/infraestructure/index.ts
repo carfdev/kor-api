@@ -1,7 +1,7 @@
-export const index = async ({ params: { token }, update }: { params: { token: string }, update: any }) => {
+export const index = async ({ params: { token }, update, html }: { params: { token: string }, update: any, html: any }) => {
   const {id} = await update.verify(token);
   if (!id) {
-    return `
+    return html(`
     <html lang='en'>
       <head>
           <title>Unauthorized</title>
@@ -11,8 +11,8 @@ export const index = async ({ params: { token }, update }: { params: { token: st
       </body>
     </html>
     `
-  }
-  return `
+    )}
+  return html(`
 <html lang='en'>
   <head>
       <title>Hello World</title>
@@ -44,4 +44,4 @@ export const index = async ({ params: { token }, update }: { params: { token: st
   </body>
 </html>
 `
-}
+)}
