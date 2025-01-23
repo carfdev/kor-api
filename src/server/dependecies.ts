@@ -25,6 +25,12 @@ import { UpdateCollectionController } from "@/collection/infraestructure/control
 import { DeleteCollection } from "@/collection/application/delete";
 import { DeleteCollectionController } from "@/collection/infraestructure/controllers/deleteCollectionController";
 
+import { UpdatePassword } from "@/user/application/updatePassword";
+import { UpdatePasswordController } from "@/user/infraestructure/controllers/updatePasswordController";
+
+import { ResetPassword } from "@/user/application/resetPaswword";
+import { ResetPasswordController } from "@/user/infraestructure/controllers/resetPasswordController";
+
 const userRepository = new UserRepository();
 const hash = new Hash();
 const createUser = new CreateUser(userRepository, hash);
@@ -51,3 +57,9 @@ export const updateCollectionController = new UpdateCollectionController(updateC
 
 const deleteCollection = new DeleteCollection(collectionRepository);
 export const deleteCollectionController = new DeleteCollectionController(deleteCollection);
+
+const updatePassword = new UpdatePassword(userRepository, hash);
+export const updatePasswordController = new UpdatePasswordController(updatePassword);
+
+const resetPassword = new ResetPassword(userRepository);
+export const resetPasswordController = new ResetPasswordController(resetPassword);
