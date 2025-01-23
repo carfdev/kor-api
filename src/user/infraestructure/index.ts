@@ -12,35 +12,5 @@ export const index = async ({ params: { token }, update, html }: { params: { tok
     </html>
     `
     )}
-  return html(`
-<html lang='en'>
-  <head>
-      <title>Reset password</title>
-  </head>
-  <body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100dvh; background-color: #f0f0f0;">
-      <p>Reset your password</p>
-      <form>
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password">
-          <button type="submit" id="submit">Submit</button>
-      </form>
-      <script>
-          const form = document.querySelector('form');
-          form.addEventListener('submit', async (event) => {
-              event.preventDefault();
-              const password = document.querySelector('#password').value;
-              const response = await fetch('/api/v1/user/update-password/${token}', {
-                  method: 'PATCH',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ password }),
-              });
-              const data = await response.json();
-              console.log(data);
-          });
-      </script>
-  </body>
-</html>
-`
-)}
+  return html(`<!DOCTYPE html><html lang="es"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/public/favicon.svg"><title>Cambiar contraseña</title><link rel="stylesheet" href="/public/_astro/index.CcFqwdDE.css"></head> <body class="bg-gray-100 flex items-center justify-center h-dvh">  <div class="w-11/12 max-w-md bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col gap-8" data-astro-cid-j7pv25f6> <h1 class="text-3xl" data-astro-cid-j7pv25f6>Cambiar contraseña</h1> <form class="flex flex-col gap-4" id="change-password-form" data-astro-cid-j7pv25f6> <label for="password" data-astro-cid-j7pv25f6>Nueva contraseña</label> <input type="password" id="password" name="password" required id="password" data-astro-cid-j7pv25f6> <label for="password-confirm" data-astro-cid-j7pv25f6>Confirmar contraseña</label> <input type="password" id="password-confirm" name="password-confirm" required id="password-confirm" data-astro-cid-j7pv25f6> <button id="change-password-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit m-auto" type="submit" data-astro-cid-j7pv25f6>Cambiar contraseña</button> </form> </div> <div id="alert" class="fixed -top-10 opacity-0 transition-all duration-300 ease-in-out left-1/2 -translate-x-1/2 text-white py-2 px-4 rounded font-bold shadow" data-astro-cid-j7pv25f6> <p data-astro-cid-j7pv25f6></p> </div>  </body></html>  <script type="module">const l=document.getElementById("change-password-form"),t=document.getElementById("password"),a=document.getElementById("password-confirm"),s=document.getElementById("change-password-button"),e=document.getElementById("alert"),c=o=>{e.classList.add("bg-green-500"),e.classList.remove("opacity-0"),e.classList.add("opacity-100"),e.classList.remove("-top-10"),e.classList.add("top-10"),e.querySelector("p").textContent=o,setTimeout(()=>{e.classList.remove("bg-green-500"),e.classList.remove("opacity-100"),e.classList.add("opacity-0"),e.classList.remove("top-10"),e.classList.add("-top-10")},3e3)},r=o=>{e.classList.add("bg-red-500"),e.classList.remove("opacity-0"),e.classList.add("opacity-100"),e.classList.remove("-top-10"),e.classList.add("top-10"),e.querySelector("p").textContent=o,setTimeout(()=>{e.classList.remove("bg-red-500"),e.classList.remove("opacity-100"),e.classList.add("opacity-0"),e.classList.remove("top-10"),e.classList.add("-top-10")},3e3)};if(!l||!t||!a||!s)throw new Error("Element not found");l.addEventListener("submit",async o=>{if(o.preventDefault(),t.value!==a.value){r("Las contraseñas no coinciden"),t.value="",a.value="";return}if(t.value.length<8){r("La contraseña debe tener al menos 8 caracteres"),t.value="",a.value="";return}s.disabled=!0,s.textContent="Cambiando...",s.classList.add("cursor-not-allowed"),s.classList.remove("hover:bg-blue-700"),s.classList.add("bg-gray-500"),s.classList.remove("bg-blue-600"),(await fetch("/api/v1/user/update-password/${token}",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:t.value})})).ok?(c("Contraseña cambiada correctamente"),t.value="",a.value="",s.disabled=!1,s.textContent="Cambiar contraseña",s.classList.remove("cursor-not-allowed"),s.classList.add("hover:bg-blue-700"),s.classList.remove("bg-gray-500"),s.classList.add("bg-blue-600")):(r("Error al cambiar la contraseña"),t.value="",a.value="",s.disabled=!1,s.textContent="Cambiar contraseña",s.classList.remove("cursor-not-allowed"),s.classList.add("hover:bg-blue-700"),s.classList.remove("bg-gray-500"),s.classList.add("bg-blue-600"))});</script>`)
+}
