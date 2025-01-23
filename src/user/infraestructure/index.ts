@@ -15,10 +15,9 @@ export const index = async ({ params: { token }, update, html }: { params: { tok
   return html(`
 <html lang='en'>
   <head>
-      <title>Hello World</title>
+      <title>Reset password</title>
   </head>
-  <body>
-      <h1>Hello World</h1>
+  <body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100dvh; background-color: #f0f0f0;">
       <p>Reset your password</p>
       <form>
           <label for="password">Password</label>
