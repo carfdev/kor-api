@@ -1,0 +1,47 @@
+export const index = async ({ params: { token }, update }: { params: { token: string }, update: any }) => {
+  const {id} = await update.verify(token);
+  if (!id) {
+    return `
+    <html lang='en'>
+      <head>
+          <title>Unauthorized</title>
+      </head>
+      <body>
+          <h1>Unauthorized</h1>
+      </body>
+    </html>
+    `
+  }
+  return `
+<html lang='en'>
+  <head>
+      <title>Hello World</title>
+  </head>
+  <body>
+      <h1>Hello World</h1>
+      <p>Reset your password</p>
+      <form>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password">
+          <button type="submit" id="submit">Submit</button>
+      </form>
+      <script>
+          const form = document.querySelector('form');
+          form.addEventListener('submit', async (event) => {
+              event.preventDefault();
+              const password = document.querySelector('#password').value;
+              const response = await fetch('/api/v1/user/update-password/${token}', {
+                  method: 'PATCH',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ password }),
+              });
+              const data = await response.json();
+              console.log(data);
+          });
+      </script>
+  </body>
+</html>
+`
+}
