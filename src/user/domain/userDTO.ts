@@ -336,3 +336,175 @@ export const refreshUserDTO = {
     }
   }
 }
+
+export const updatePasswordDTO = {
+  params: t.Object({
+    token: t.String()
+  }),
+  body: t.Object({
+    password: t.String({
+      minLength: 8,
+      error: { message: "Password must be at least 8 characters" }
+    })
+  }, {
+    error: { message: "Invalid request body" }
+  }),
+  detail: {
+    tags: ['Auth'],
+    summary: 'Update password',
+    description: 'Update password with the given token',
+    security: [
+      {
+        cookieAuth: []
+      }
+    ],
+    responses: {
+      200: {
+        description: 'Password updated successfully',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Password updated successfully'
+              }
+            }
+          }
+        }
+      },
+      400: {
+        description: 'Bad Request',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Password is required'
+              }
+            }
+          }
+        }
+      },
+      404: {
+        description: 'Not Found',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'User not found'
+              }
+            }
+          }
+        }
+      },
+      500: {
+        description: 'Internal Server Error',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Internal Server Error'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+export const resetPasswordDTO = {
+  body: t.Object({
+    email: t.String({
+      format: "email",
+      error: { message: "Invalid email" }
+    })
+  }, {
+    error: { message: "Invalid request body" }
+  }),
+  detail: {
+    tags: ['Auth'],
+    summary: 'Reset password',
+    description: 'Reset password with the given email',
+    responses: {
+      200: {
+        description: 'Password reset successfully',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Password reset successfully'
+              }
+            }
+          }
+        }
+      },
+      400: {
+        description: 'Bad Request',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Email is required'
+              }
+            }
+          }
+        }
+      },
+      404: {
+        description: 'Not Found',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'User not found'
+              }
+            }
+          }
+        }
+      },
+      500: {
+        description: 'Internal Server Error',
+        content: {  
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                message: { type: 'string' }
+              },
+              example: {
+                message: 'Internal Server Error'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
