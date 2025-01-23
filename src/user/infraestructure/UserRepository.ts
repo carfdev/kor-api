@@ -53,4 +53,15 @@ export class UserRepository implements IUser {
     }
     return new User(user.id, user.email, user.password);
   }
+
+  async updatePassword(id: string, password: string): Promise<void> {
+    await this.db.user.update({
+      where: {
+        id: id
+      },
+      data: {
+        password: password
+      }
+    });
+  }
 }
