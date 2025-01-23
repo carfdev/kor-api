@@ -7,7 +7,7 @@ export class LoginUser {
     private hash: IHash
   ) {}
 
-  async run(email: string, password: string, refresh_token?: string) {
+  async run(email: string, password: string) {
     const user = await this.userRepository.find(email);
     if (!user) {
       return new Error("User not found");
