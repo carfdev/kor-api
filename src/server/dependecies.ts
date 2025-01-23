@@ -30,6 +30,7 @@ import { UpdatePasswordController } from "@/user/infraestructure/controllers/upd
 
 import { ResetPassword } from "@/user/application/resetPaswword";
 import { ResetPasswordController } from "@/user/infraestructure/controllers/resetPasswordController";
+import { Email } from "@/services/resend";
 
 const userRepository = new UserRepository();
 const hash = new Hash();
@@ -61,5 +62,6 @@ export const deleteCollectionController = new DeleteCollectionController(deleteC
 const updatePassword = new UpdatePassword(userRepository, hash);
 export const updatePasswordController = new UpdatePasswordController(updatePassword);
 
+const email = new Email();
 const resetPassword = new ResetPassword(userRepository);
-export const resetPasswordController = new ResetPasswordController(resetPassword);
+export const resetPasswordController = new ResetPasswordController(resetPassword, email);
