@@ -5,4 +5,5 @@ export interface IUser {
   find(email: string): Promise<User | null>;
   addRefreshToken(id: string, refresh_token: string): Promise<void>;
   getRefreshToken(id: string): Promise<string | null>;
+  updatePassword(id: string, password: string): Promise<void>;
 }
