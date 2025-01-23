@@ -2,9 +2,12 @@ import { Elysia } from "elysia";
 import { createUserController, loginUserController, refreshTokenController, updatePasswordController, resetPasswordController } from "@/server/dependecies";
 import { createUserDTO, loginUserDTO, refreshUserDTO, updatePasswordDTO, resetPasswordDTO } from "./domain/userDTO";
 import { jwt } from '@elysiajs/jwt'
+import { html } from "@elysiajs/html";
+import { index} from "./infraestructure/index"
 export const userRouter = new Elysia({
   prefix: "/user"
 })
+  .use(html())
   .use(jwt({
     name: "update",
     secret: process.env.JWT_SECRET_UPDATE as string,
@@ -30,3 +33,4 @@ export const userRouter = new Elysia({
   .patch('/update-password/:token', (ctx) => updatePasswordController.run(ctx), updatePasswordDTO)
   // @ts-ignore
   .post('/reset-password', (ctx) => resetPasswordController.run(ctx), resetPasswordDTO)
+  .get('/reset-password/:token', (ctx) => index(ctx));
