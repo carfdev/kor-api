@@ -3,6 +3,7 @@ import { createUserController, loginUserController, refreshTokenController, upda
 import { createUserDTO, loginUserDTO, refreshUserDTO, updatePasswordDTO, resetPasswordDTO } from "./domain/userDTO";
 import { jwt } from '@elysiajs/jwt'
 import { html } from "@elysiajs/html";
+
 import { index} from "./infraestructure/index"
 export const userRouter = new Elysia({
   prefix: "/user"
