@@ -1,7 +1,8 @@
 import { ResetPassword } from "@/user/application/resetPaswword";
+import type { IResend } from "@/services/interfaces/IResend";
 
 export class ResetPasswordController {
-  constructor(private resetPassword: ResetPassword) {}
+  constructor(private resetPassword: ResetPassword, private email: IResend) {}
 
   async run({ body: { email }, set, update }: { body: { email: string }, set: any, update: any }) {
     try {
@@ -15,8 +16,9 @@ export class ResetPasswordController {
       const token = await update.sign({ id: user.id });
 
       set.value = 200;
+      await this.email.sent(email, "Reset password", `<a href="http://localhost:3000/reset-password/${token}">Reset password</a>`);
       return {
-        token
+        message: "Email sent"
       }
     } catch (e: any) {
       set.status = 500;
