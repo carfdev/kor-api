@@ -47,7 +47,7 @@ export class ResetPasswordController {
                                       <tbody>
                                         <tr>
                                           <td align="center" style="padding:0;Margin:0;font-size:0px">
-                                            <img class="adapt-img" src="https://pub-0a144e69bb31494aa2cd840966b21242.r2.dev/81737892471263012.png" alt="Eid al-Adha" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" title="Eid al-Adha" height="373" width="560">
+                                            <img class="adapt-img" src="https://tlr.stripocdn.email/content/guids/CABINET_7eaca9f07ed40c6120e36893d625becf/images/74941620307889660.png" alt="Eid al-Adha" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" title="Eid al-Adha" height="373" width="560">
                                           </td>
                                         </tr>
                                         <tr>
