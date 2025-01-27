@@ -1,5 +1,5 @@
 import { Elysia } from "elysia";
-import { createUserController, loginUserController, refreshTokenController, updatePasswordController, resetPasswordController } from "@/server/dependecies";
+import { createUserController, loginUserController, refreshTokenController, updatePasswordController, resetPasswordController } from "@/user/infraestructure/userDependencies";
 import { createUserDTO, loginUserDTO, refreshUserDTO, updatePasswordDTO, resetPasswordDTO } from "./domain/userDTO";
 import { jwt } from '@elysiajs/jwt'
 import { html } from "@elysiajs/html";

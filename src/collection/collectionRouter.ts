@@ -1,10 +1,6 @@
 import { Elysia } from "elysia";
-import { createCollectionController } from "@/server/dependecies";
-import { getAllCollectionController } from "@/server/dependecies";
-import { updateCollectionController } from "@/server/dependecies";
-import { deleteCollectionController } from "@/server/dependecies";
+import { createCollectionController, getAllCollectionController, updateCollectionController, deleteCollectionController, getCollectionController } from "@/collection/infraestructure/collectionDependecies";
 import { createCollectionDTO, getCollectionDTO, getAllCollectionDTO, updateCollectionDTO, deleteCollectionDTO } from "./domain/collectionDTO";
-import { getCollectionController } from "@/server/dependecies"; 
 import { jwt } from '@elysiajs/jwt'
 
 export const collectionRouter = new Elysia({
