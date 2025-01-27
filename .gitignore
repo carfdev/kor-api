@@ -46,6 +46,3 @@ run
 
 /prisma/migrations
 /prisma/dev.db*
-
-Dockerfile
-.dockerignore
