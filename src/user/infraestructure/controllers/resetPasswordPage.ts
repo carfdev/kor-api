@@ -1,5 +1,5 @@
-export const index = async ({ params: { token }, update, html }: { params: { token: string }, update: any, html: any }) => {
-  const {id} = await update.verify(token);
+export const resetPasswordPage = async ({ params: { token }, update, html }: { params: { token: string }, update: any, html: any }) => {
+  const { id } = await update.verify(token);
   if (!id) {
     return html(`<!DOCTYPE html><html lang="es"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="https://pub-0a144e69bb31494aa2cd840966b21242.r2.dev/favicon.svg"><title>Cambiar contraseña</title><link rel="stylesheet" href="https://pub-0a144e69bb31494aa2cd840966b21242.r2.dev/_astro/index.CQ57Qz7M.css"></head> <body class="bg-gray-100 flex items-center justify-center h-dvh">  <div class="w-11/12 max-w-md bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col gap-8"> <h1 class="text-3xl font-bold text-red-500 text-center">Acceso denegado</h1> <div class="flex flex-col gap-4"> <p class="text-lg text-gray-600">El enlace para restablecer tu contraseña no es válido. Esto puede deberse a que:</p> <ul class="list-disc list-inside text-gray-600"> <li>El enlace ha caducado.</li> <li>El enlace ha sido utilizado anteriormente.</li> <li>El enlace ha sido modificado.</li> </ul> </div> <p class="text-lg text-gray-600">Por favor, solicita un nuevo enlace para restablecer tu contraseña.</p> </div>  </body></html>`)
   }

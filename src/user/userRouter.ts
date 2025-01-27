@@ -1,10 +1,9 @@
 import { Elysia } from "elysia";
 import { createUserController, loginUserController, refreshTokenController, updatePasswordController, resetPasswordController } from "@/user/infraestructure/userDependencies";
+import { resetPasswordPage } from "./infraestructure/controllers/resetPasswordPage";
 import { createUserDTO, loginUserDTO, refreshUserDTO, updatePasswordDTO, resetPasswordDTO } from "./domain/userDTO";
 import { jwt } from '@elysiajs/jwt'
 import { html } from "@elysiajs/html";
-
-import { index} from "./infraestructure/index"
 export const userRouter = new Elysia({
   prefix: "/user"
 })
@@ -34,4 +33,4 @@ export const userRouter = new Elysia({
   .patch('/update-password/:token', (ctx) => updatePasswordController.run(ctx), updatePasswordDTO)
   // @ts-ignore
   .post('/reset-password', (ctx) => resetPasswordController.run(ctx), resetPasswordDTO)
-  .get('/reset-password/:token', (ctx) => index(ctx));
+  .get('/reset-password/:token', (ctx) => resetPasswordPage(ctx));
