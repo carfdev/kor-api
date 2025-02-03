@@ -1,9 +1,17 @@
 import { Elysia } from "elysia";
-import { createUserController, loginUserController, refreshTokenController, updatePasswordController, resetPasswordController } from "@/user/infraestructure/userDependencies";
+import controllers from "@/user/infraestructure/userDependencies";
 import { resetPasswordPage } from "./infraestructure/controllers/resetPasswordPage";
 import { createUserDTO, loginUserDTO, refreshUserDTO, updatePasswordDTO, resetPasswordDTO } from "./domain/userDTO";
 import { jwt } from '@elysiajs/jwt'
 import { html } from "@elysiajs/html";
+
+const {
+  createUserController,
+  loginUserController,
+  refreshTokenController,
+  updatePasswordController,
+  resetPasswordController
+} = controllers
 export const userRouter = new Elysia({
   prefix: "/user"
 })
