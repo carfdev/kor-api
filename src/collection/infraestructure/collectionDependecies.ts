@@ -1,4 +1,5 @@
 import { CollectionRepository } from "@/collection/infraestructure/CollectionRepository";
+
 import { CreateCollection } from "@/collection/application/create";
 import { CreateCollectionController } from "@/collection/infraestructure/controllers/createCollectionController";
 
@@ -14,19 +15,31 @@ import { UpdateCollectionController } from "@/collection/infraestructure/control
 import { DeleteCollection } from "@/collection/application/delete";
 import { DeleteCollectionController } from "@/collection/infraestructure/controllers/deleteCollectionController";
 
-
 const collectionRepository = new CollectionRepository();
-const createCollection = new CreateCollection(collectionRepository);
-export const createCollectionController = new CreateCollectionController(createCollection);
 
-const getAllCollection = new GetAllCollection(collectionRepository);
-export const getAllCollectionController = new GetAllCollectionController(getAllCollection);
+// Define un tipo para relacionar casos de uso y controladores
+type ControllerConfig = {
+  useCase: new (repository: CollectionRepository) => any;
+  controller: new (useCase: any) => any;
+};
 
-const getCollection = new GetCollection(collectionRepository);
-export const getCollectionController = new GetCollectionController(getCollection);
+// Lista de configuraciones con tipos específicos
+const controllers: ControllerConfig[] = [
+  { useCase: CreateCollection, controller: CreateCollectionController },
+  { useCase: GetAllCollection, controller: GetAllCollectionController },
+  { useCase: GetCollection, controller: GetCollectionController },
+  { useCase: UpdateCollection, controller: UpdateCollectionController },
+  { useCase: DeleteCollection, controller: DeleteCollectionController },
+];
 
-const updateCollection = new UpdateCollection(collectionRepository);
-export const updateCollectionController = new UpdateCollectionController(updateCollection);
+// Objeto para almacenar los controladores exportados
+const exportedControllers: Record<string, any> = {};
 
-const deleteCollection = new DeleteCollection(collectionRepository);
-export const deleteCollectionController = new DeleteCollectionController(deleteCollection);
+controllers.forEach(({ useCase, controller }) => {
+  const useCaseInstance = new useCase(collectionRepository);
+  const controllerInstance = new controller(useCaseInstance);
+  const controllerName = controller.name[0].toLowerCase() + controller.name.slice(1); // Convertir a camelCase
+  exportedControllers[controllerName] = controllerInstance;
+});
+
+export default exportedControllers;
