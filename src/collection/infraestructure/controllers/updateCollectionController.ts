@@ -25,7 +25,7 @@ export class UpdateCollectionController {
 
       const { id: userId } = await access.verify(token);
 
-      if (userId !== '534635a6-fa3d-4a87-89f5-62cb99beb314') {
+      if (userId !== 'ed44735a-15e5-462b-b4cd-face0592fbbc') {
         set.status = 401;
         return {
           message: "Unauthorized"
