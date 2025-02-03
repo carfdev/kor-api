@@ -16,20 +16,57 @@ import { ResetPassword } from "@/user/application/resetPaswword";
 import { ResetPasswordController } from "@/user/infraestructure/controllers/resetPasswordController";
 import { Email } from "@/services/resend";
 
+// Instancias necesarias
 const userRepository = new UserRepository();
 const hash = new Hash();
-const createUser = new CreateUser(userRepository, hash);
-export const createUserController = new CreateUserController(createUser);
-
-const loginUser = new LoginUser(userRepository, hash);
-export const loginUserController = new LoginUserController(loginUser);
-
-const refreshToken = new RefreshToken(userRepository);
-export const refreshTokenController = new RefreshTokenController(refreshToken);
-
-const updatePassword = new UpdatePassword(userRepository, hash);
-export const updatePasswordController = new UpdatePasswordController(updatePassword);
-
 const email = new Email();
-const resetPassword = new ResetPassword(userRepository);
-export const resetPasswordController = new ResetPasswordController(resetPassword, email);
+
+// Tipo para asociar casos de uso y controladores con sus dependencias
+type ControllerConfig = {
+  useCase: new (...args: any[]) => any;
+  dependencies: any[];
+  controller: new (useCase: any, ...extraDeps: any[]) => any;
+  extraDeps?: any[]; // Ahora extraDeps es opcional
+};
+
+// Configuración de controladores
+const controllers: ControllerConfig[] = [
+  { 
+    useCase: CreateUser, 
+    dependencies: [userRepository, hash], 
+    controller: CreateUserController 
+  },
+  { 
+    useCase: LoginUser, 
+    dependencies: [userRepository, hash], 
+    controller: LoginUserController 
+  },
+  { 
+    useCase: RefreshToken, 
+    dependencies: [userRepository], 
+    controller: RefreshTokenController 
+  },
+  { 
+    useCase: UpdatePassword, 
+    dependencies: [userRepository, hash], 
+    controller: UpdatePasswordController 
+  },
+  { 
+    useCase: ResetPassword, 
+    dependencies: [userRepository], 
+    controller: ResetPasswordController,
+    extraDeps: [email] 
+  },
+];
+
+// Objeto para almacenar los controladores exportados
+const exportedControllers: Record<string, any> = {};
+
+controllers.forEach(({ useCase, dependencies, controller, extraDeps = [] }) => {
+  const useCaseInstance = new useCase(...dependencies);
+  const controllerInstance = new controller(useCaseInstance, ...extraDeps);
+  const controllerName = controller.name[0].toLowerCase() + controller.name.slice(1); // Convertir a camelCase
+  exportedControllers[controllerName] = controllerInstance;
+});
+
+export default exportedControllers;
